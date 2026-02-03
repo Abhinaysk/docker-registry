@@ -29,7 +29,7 @@ pipeline {
                         string(credentialsId: 'sonar-backend', variable: 'SONAR_TOKEN')
                     ]) {
                         sh '''
-                          mvn sonar:sonar \
+                          sonar:sonar \
                             -Dsonar.host.url=http://3.110.215.9:9000 \
                             -Dsonar.login=$SONAR_TOKEN
                         '''
