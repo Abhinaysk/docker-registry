@@ -24,7 +24,7 @@ pipeline {
 
         stage("Debug Workspace") {
             steps {
-                dir('./backend')  {
+                dir('./mern_3tire-main/backend')  {
                 sh '''
                     pwd
                     ls -R .
@@ -37,7 +37,7 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                dir('./backend') {
+                dir('./mern_3tire-main/backend') {
                     withCredentials([
                         string(credentialsId: 'sonar-backend', variable: 'SONAR_TOKEN')
                     ]) {
