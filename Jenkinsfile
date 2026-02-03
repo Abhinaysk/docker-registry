@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        BACKEND_IMAGE = "abhinay/backend"
+        BACKEND_IMAGE = "abhinaysk/backend"
         DOCKER_FILE   = "./Dockerfile"
     }
 
