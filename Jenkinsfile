@@ -55,10 +55,8 @@ pipeline {
         stage("Build and Push Image") {
             steps {
                 script {
-                    def customImage = docker.build(
-                        "${BACKEND_IMAGE}:${env.BUILD_NUMBER}",
-                        "-f ${DOCKER_FILE} ."
-                    )
+                    dir('./mern_3tire-main/backend') {
+                    def customImage = docker.build("${BACKEND_IMAGE}:${env.BUILD_NUMBER}", "-f ${env.DOCKERFILE_BACKEND} .")
 
                     docker.withRegistry(
                         'https://registry.hub.docker.com',
@@ -66,6 +64,7 @@ pipeline {
                     ) {
                         customImage.push("${env.BUILD_NUMBER}")
                         customImage.push("latest")
+                    }
                     }
                 }
             }
