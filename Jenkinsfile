@@ -57,7 +57,6 @@ pipeline {
                         credentialsId: 'dockerhub-credentials', 
                         usernameVariable: 'DOCKERHUB_USERNAME', 
                         passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                        sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin'{
                     
                     // // Login to Docker Hub
                     // docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
@@ -70,7 +69,7 @@ pipeline {
         }
 
     }
-}
+
 
     post {
         always {
