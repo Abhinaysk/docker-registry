@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
+        maven 'maven'   // ✅ FIXED (must match Jenkins tool name)
     }
 
     environment {
@@ -42,20 +42,17 @@ pipeline {
             steps {
                 script {
                     def customImage = docker.build(
-                        "${BACKEND_IMAGE}:${env.BUILD_NUMBER}"
+                        "${BACKEND_IMAGE}:${env.BUILD_NUMBER}",
+                        "-f ${DOCKER_FILE} ."
                     )
 
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'dockerhub-credentials',
-                            usernameVariable: 'DOCKERHUB_USERNAME',
-                            passwordVariable: 'DOCKERHUB_PASSWORD'
-                        )
-                    ]) {
-                        // docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                            customImage.push("${BACKEND_IMAGE}:${env.BUILD_NUMBER}")
-                        }
-                    
+                    docker.withRegistry(
+                        'https://registry.hub.docker.com',
+                        'dockerhub-credentials'
+                    ) {
+                        customImage.push("${env.BUILD_NUMBER}")
+                        customImage.push("latest")
+                    }
                 }
             }
         }
