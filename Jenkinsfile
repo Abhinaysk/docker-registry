@@ -14,7 +14,6 @@ pipeline {
 
         stage("Checkout Code") {
             steps {
-                dir('./backend')  {
                 git(
                     url: 'https://github.com/Abhinaysk/mern-3tier.git',
                     branch: 'main',
@@ -22,7 +21,19 @@ pipeline {
                 )
             }
         }
+
+        stage("Debug Workspace") {
+            steps {
+                dir('./backend')  {
+                sh '''
+                    pwd
+                    ls -R .
+                    ls -lrt
+            
+                '''
+            }
         }
+
 
         stage("SonarQube Analysis") {
             steps {
@@ -31,8 +42,7 @@ pipeline {
                         string(credentialsId: 'sonar-backend', variable: 'SONAR_TOKEN')
                     ]) {
                         sh '''
-                          pwd
-                          ls -lrt
+                          
                           sonar-scanner \
                             -Dsonar.host.url=http://3.110.215.9:9000 \
                             -Dsonar.login=$SONAR_TOKEN
