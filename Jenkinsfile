@@ -24,7 +24,7 @@ pipeline {
 
         stage("SonarQube Analysis") {
             steps {
-                dir('backend') {
+                dir('./backend') {
                     withCredentials([
                         string(credentialsId: 'sonar-backend', variable: 'SONAR_TOKEN')
                     ]) {
