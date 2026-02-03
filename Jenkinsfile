@@ -56,7 +56,7 @@ pipeline {
             steps {
                 script {
                     dir('./mern_3tire-main/backend') {
-                    def customImage = docker.build("${BACKEND_IMAGE}:${env.BUILD_NUMBER}", "-f ${env.DOCKERFILE_BACKEND} .")
+                    def customImage = docker.build("${BACKEND_IMAGE}:${env.BUILD_NUMBER}", "-f ${DOCKER_FILE} .")
 
                     docker.withRegistry(
                         'https://registry.hub.docker.com',
