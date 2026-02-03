@@ -14,6 +14,7 @@ pipeline {
 
         stage("Checkout Code") {
             steps {
+                dir('./backend')  {
                 git(
                     url: 'https://github.com/Abhinaysk/mern-3tier.git',
                     branch: 'main',
