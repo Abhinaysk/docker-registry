@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'node18'
+        maven 'Maven'
     }
     
     environment{
@@ -69,7 +69,7 @@ pipeline {
         }
 
     }
-
+}
 
     post {
         always {
