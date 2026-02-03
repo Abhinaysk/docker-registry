@@ -52,11 +52,10 @@ pipeline {
                             passwordVariable: 'DOCKERHUB_PASSWORD'
                         )
                     ]) {
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                            customImage.push("${env.BUILD_NUMBER}")
-                            customImage.push("latest")
+                        // docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                            customImage.push("${BACKEND_IMAGE}:${env.BUILD_NUMBER}")
                         }
-                    }
+                    
                 }
             }
         }
